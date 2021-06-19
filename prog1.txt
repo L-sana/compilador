@@ -1,0 +1,14 @@
+if var < 100.5550  then
+   print var;
+else if var > 100 then
+   print "var",
+else 
+    print 1000// 5555255
+/*oR*/
+/**664456**/555
+"ghghh"
+/***/
+      noT
+   PRINT
+//551
+ff
