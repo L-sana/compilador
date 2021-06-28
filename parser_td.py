@@ -66,6 +66,7 @@ class Parser():
       if(self.token.getNome() != Tag.EOF):
          self.sinalizaErroSintatico("Esperado \"EOF\"; encontrado " + "\"" + self.token.getLexema() + "\"")
       self.body()
+      
    #2 - body
    def body(self):
       self.decl_list()
@@ -76,17 +77,180 @@ class Parser():
             self.sinalizaErroSintatico("Esperado \"}\", encontrado " + "\"" + self.token.getLexema() + "\"")
       else:
          self.sinalizaErroSintatico("Esperado \" { \", encontrado " + "\"" + self.token.getLexema() + "\"")
+         
       
-   
-   def decl_list(self):
-   def stmt_list(self):
-   
-   
-   
-   
-   
-   
-   
+
+   #3 - decl-list -> decl “;” decl-list 3 | ε 4
+   def decl_list(self): 
+      self.decl()
+      if(self.eat(Tag.SMB_):
+         self.decl_list()
+         
+         if(not self.eat(self.eat(Tag.SMB_CBC)):
+            self.sinalizaErroSintatico("Esperado \"}\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \" { \", encontrado " + "\"" + self.token.getLexema() + "\"")
+      
+
+   #5 decl -> type id-list           
+   def decl(self):  
+      self.type()
+      self.id_list()
+      
+   # 6-7 -  type_ → “num” | “char”   
+   def type_():
+      if(not self.eat(Tag.NUM)):
+         if(not self.eat(Tag.CHAR)):      
+            self.sinalizaErroSintatico("Esperado \"num ou char\", encontrado " + "\"" + self.token.getLexema() + "\"")
+   #8 - id_list
+   def id_list():
+      if(self.eat(Tag.ID):
+         self.id_listLinha()
+                 
+      else:
+         self.sinalizaErroSintatico("Esperado \" ID \", encontrado " + "\"" + self.token.getLexema() + "\"")
+     
+   #id-list’ → “,” id-list 9 | ε 10  
+   def id_listLinha():
+      if(self.eat(Tag.SMB_COM)):
+         self.id_list()
+         
+      if(not self.eat(Tag.SMB_COM)):  
+         self.sinalizaErroSintatico("Esperado \",\", encontrado " + "\"" + self.token.getLexema() + "\"")
+         
+   #stmt “;” stmt-list 11 | ε 12
+   def stmt_list():
+      if(self.eat(Tag.SMB_SEM)):
+         self.stms_list()
+      
+      if(not self.eat(Tag.SMB_SEM)):  
+         self.sinalizaErroSintatico("Esperado \";\", encontrado " + "\"" + self.token.getLexema() + "\"")
+
+         
+   #assign-stmt 13 | if-stmt 14 | while-stmt 15 | read-stmt 16 | write-stmt 17
+   def stmt():
+      self.assign_stmt()
+      self.if_stmt()
+      self.while_stmt()
+      self.read_stmt()
+      self.write_stmt()
+
+   #“id” “=” simple_expr 18
+   def assign_stmt():
+      if(self.eat(Tag.ID)):
+         if(self.eat(Tag.OP_ATRIB):
+            self.simple_expr()
+         else:
+            self.sinalizaErroSintatico("Esperado \"=\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \"id\", encontrado " + "\"" + self.token.getLexema() + "\"")
+
+         
+   #“if” “(“ expression “)” “{“ stmt-list “}” if-stmt’ 19
+   def if_stmt():
+      if(self.eat(Tag.KW_IF)):
+         if(self.eat(Tag.SMB_OPA)):
+            self.expression()
+            if(self.eat(Tag.SMB_CPA):
+               if(self.eat(Tag.SMB_OBC)):
+                  self.stmt_list()
+                  if(self.eat(Tag.SMB_CBC)):
+                     self.stmt_linha()
+                  else:
+                     self.sinalizaErroSintatico("Esperado \"}\", encontrado " + "\"" + self.token.getLexema() + "\"")
+               else:
+                  self.sinalizaErroSintatico("Esperado \"{\", encontrado " + "\"" + self.token.getLexema() + "\"")
+            else:
+               self.sinalizaErroSintatico("Esperado \")\", encontrado " + "\"" + self.token.getLexema() + "\"")
+         else:
+            self.sinalizaErroSintatico("Esperado \"(\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \"if\", encontrado " + "\"" + self.token.getLexema() + "\"")
+
+   #“else” “{“ stmt-list “}” 20 | ε 21 (Verificar necessidade de correção)
+   def if_stmtLinha():
+      if(self.eat(Tag.KW_ELSE)):
+         if(self.eat(Tag.KW_OBC)):
+            self.stmt_list()
+            if(self.eat(Tag.KW_CBC)):
+               #O que fazer aqui?
+            else:
+               self.sinalizaErroSintatico("Esperado \"}\", encontrado " + "\"" + self.token.getLexema() + "\"")
+         else:
+            self.sinalizaErroSintatico("Esperado \"{\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \"else\", encontrado " + "\"" + self.token.getLexema() + "\"")
+
+
+   #stmt-prefix “{“ stmt-list “}” 22
+   def while_stmt():
+      self.stmt_prefix()
+      if(self.eat(Tag.KW_OBC)):
+         self.stmt_list()
+         if(self.eat(Tag.CBC)):
+            #Oque Fazer Aqui?
+         else:
+            self.sinalizaErroSintatico("Esperado \"}\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \"{\", encontrado " + "\"" + self.token.getLexema() + "\"")
+
+   #“while” “(“ expression “)” 23
+   def stmt_prefix():
+
+   #“read” “id” 24
+   def read_stmt():
+
+   #“write” simple-expr 25
+   def write_stmt():
+
+   #simple-expr expression’ 26  
+   def expression():
+      
+   #  logop simple-expr expression’ 27 | ε 28 
+   def expressionLinha():
+
+   #term simple-exp’29
+   def simple_expr():
+
+   #relop term simple-exp’ 30 | ε 31
+   def simple_exprLinha():
+
+   #factor-b term’ 32   
+   def term():
+      
+   #addop factor-b term’ 33 | ε 34
+   def termLinha():
+
+   #factor-a factor-b’ 35
+   def factor_b():
+
+   #mulop factor-a factor-b’ 36 | ε 37
+   def factor_bLinha():
+
+   #factor 38 | not factor 39
+   def factor_a():
+
+   #“id” 40 | constant 41 | “(“ expression “)” 42
+   def factor():
+
+   #“or” 43 | “and” 44
+   def logop():
+
+   #“==”45 | “>” 46 | “>=” 47 | “<” 48 | “<=” 49 | “!=” 50
+   def relop():
+
+   #“+” 51 | “-” 52
+   def addop():
+
+   #“*” 53 | “/” 54
+   def mulop():
+
+   #“num_const” 55 | “char_const” 56
+   def constant():
+      
+
+
+   ##Exemplo
    # Programa -> CMD EOF
    def Programa(self):
       self.Cmd()

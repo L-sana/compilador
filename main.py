@@ -4,7 +4,7 @@ from lexer import Lexer
 
 if __name__ == "__main__":
    lexer = Lexer('prog1.txt')
-   print("Alan Edrick Eremita Dias\nLeandro Gama\n******Recuperação de erro implementada")
+   print("Lais Sana\nAlan Eremita\nLeandro Gama\n******Recuperação de erro implementada")
    print("\n=>Lista de tokens:")
    token = lexer.proxToken()
    while(token is not None and token.getNome() != Tag.EOF):

@@ -39,11 +39,11 @@ class Tag(Enum):
    # Numeros
    NUM= 22
     #Símbolos
-   SMB_OBC=23
-   SMB_CBC=24
-   SMB_OPA=25
-   SMB_CPA=26
-   SMB_COM=27
+   SMB_OBC=23 #{
+   SMB_CBC=24 #}
+   SMB_OPA=25 #(
+   SMB_CPA=26 #)
+   SMB_COM=27 #
    SMB_SEM=28
 
    #char
@@ -52,7 +52,7 @@ class Tag(Enum):
    CHAR_CONST=30
    NUM_CONST=31
 
-   #Analiador Sintatico
+   #Analisador Sintatico
    KW_PROGRAM=32
 
 
