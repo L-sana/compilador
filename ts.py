@@ -23,6 +23,8 @@ class TS:
       self.ts['and']=Token(Tag.KW_AND, 'and', line,column)
       self.ts['not']=Token(Tag.KW_WHILE, 'not', line,column)
       self.ts['program']=Token(Tag.KW_PROGRAM, 'program', line,column)
+      self.ts['read']=Token(Tag.KW_READ, 'read', line,column)
+      self.ts['write']=Token(Tag.KW_WRITE, 'write', line,column)
 
       
       

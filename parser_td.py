@@ -129,11 +129,22 @@ class Parser():
          
    #assign-stmt 13 | if-stmt 14 | while-stmt 15 | read-stmt 16 | write-stmt 17
    def stmt():
-      self.assign_stmt()
-      self.if_stmt()
-      self.while_stmt()
-      self.read_stmt()
-      self.write_stmt()
+      if(self.eat(Tag.ID)):
+         self.assign_stmt()
+      elif(self.eat(Tag.KW_IF):
+         self.if_stmt()
+      elif(self.eat(Tag.KW_WHILE):
+         self.while_stmt()
+      elif(self.eat(Tag.KW_READ):
+         self.read_stmt()
+      elif(self.eat(Tag.KW_WRITE):
+         self.write_stmt()
+      
+      
+      
+      
+      
+      
 
    #“id” “=” simple_expr 18
    def assign_stmt():
@@ -196,7 +207,15 @@ class Parser():
 
    #“while” “(“ expression “)” 23
    def stmt_prefix():
-
+      if(self.eat(Tag.KW_WHILE)):
+         if(self.eat(Tag.SMB_OPA):
+            self.expression()
+            if(not self.eat(Tag.SMB_CPA):             
+               self.sinalizaErroSintatico("Esperado \")\", encontrado " + "\"" + self.token.getLexema() + "\"")
+         else:
+            self.sinalizaErroSintatico("Esperado \"(\", encontrado " + "\"" + self.token.getLexema() + "\"")
+      else:
+         self.sinalizaErroSintatico("Esperado \"while\", encontrado " + "\"" + self.token.getLexema() + "\"")
    #“read” “id” 24
    def read_stmt():
 

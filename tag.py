@@ -20,6 +20,8 @@ class Tag(Enum):
    KW_OR = 7
    KW_AND =8
    KW_NOT = 9
+   KW_READ=50
+   KW_WRITE=51
 
    # Operadores 
    OP_MENOR = 10
@@ -30,8 +32,8 @@ class Tag(Enum):
    OP_DIFERENTE = 15
    OP_DIV=16
    OP_ATRIB=17
-   OP_AD = 18
-   OP_MIN = 19
+   OP_AD = 18#+
+   OP_MIN = 19#-
    OP_MUL = 20
     
    # Identificador
@@ -43,8 +45,8 @@ class Tag(Enum):
    SMB_CBC=24 #}
    SMB_OPA=25 #(
    SMB_CPA=26 #)
-   SMB_COM=27 #
-   SMB_SEM=28
+   SMB_COM=27 #,
+   SMB_SEM=28@#;
 
    #char
    CHAR=29
