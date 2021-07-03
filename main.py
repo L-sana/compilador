@@ -1,16 +1,18 @@
 from tag import Tag
 from token import Token
 from lexer import Lexer
+from parserAnali import ParserAnali
 
 if __name__ == "__main__":
-   lexer = Lexer('prog1.txt')
-   print("Lais Sana\nAlan Eremita\nLeandro Gama\n******Recuperação de erro implementada")
+   lexer = Lexer('ProgramTestClass.pasc')
+   print("Grupo: { \n    Lais Sana\n    Alan Eremita\n    Leandro Gama\n}\n******Recuperação de erro implementada")
    print("\n=>Lista de tokens:")
-   token = lexer.proxToken()
-   while(token is not None and token.getNome() != Tag.EOF):
-      print(token.toString(), "Linha: " + str(token.getLinha()) + " Coluna: " + str(token.getColuna()))
-      token = lexer.proxToken()
-      
+   parserAnali = ParserAnali(lexer)
+
+   parserAnali.Programa()
+
+   parserAnali.lexer.closeFile()
+
    print("\n=>Tabela de simbolos:")
    lexer.printTS()
    lexer.closeFile()

@@ -1,0 +1,21 @@
+/*  Programa Teste Compilador Pasc  */
+
+
+program ProgramTestClass
+   num num1, num2, num3,  media;
+   char nomeAluno; 
+{   
+   write "Programinha para calcular media";
+   
+   num1 = 100;
+   num2 = 500;
+   num3 = 400;
+
+   media = ((num1 + num2 + num3)/2);
+
+   write("Media do aluno =");
+   write(media);
+
+ /** um comentario finalizando programinha**/
+
+} // Fim

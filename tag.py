@@ -9,56 +9,50 @@ class Tag(Enum):
    # Fim de arquivo
    EOF = -1
 
-   # Palavras-chave
-   KW_IF = 0
-   KW_ELSE = 1
-   KW_THEN = 2
-   KW_PRINT = 3
+# Palavras-chave
+   KW_PROGRAM = 1
+   KW_IF = 2
+   KW_ELSE = 3
    KW_WHILE = 4
-   KW_READ =5
-   KW_WRITE =6
-   KW_OR = 7
-   KW_AND =8
+   KW_WRITE = 5
+   KW_READ = 6
+   KW_NUM = 7
+   KW_CHAR = 8
    KW_NOT = 9
-   KW_READ=50
-   KW_WRITE=51
+   KW_OR = 10
+   KW_AND = 11
 
-   # Operadores 
-   OP_MENOR = 10
-   OP_MENOR_IGUAL = 11
-   OP_MAIOR_IGUAL = 12
-   OP_MAIOR = 13
-   OP_IGUAL = 14
-   OP_DIFERENTE = 15
-   OP_DIV=16
-   OP_ATRIB=17
-   OP_AD = 18#+
-   OP_MIN = 19#-
+#Operadores 
+   OP_EQ = 12
+   OP_NE = 13
+   OP_GT = 14
+   OP_LT = 15
+   OP_GE = 16
+   OP_LE = 17
+   OP_ADD = 18
+   OP_MIN = 19
    OP_MUL = 20
-    
-   # Identificador
-   ID = 21
-   # Numeros
-   NUM= 22
-    #Símbolos
-   SMB_OBC=23 #{
-   SMB_CBC=24 #}
-   SMB_OPA=25 #(
-   SMB_CPA=26 #)
-   SMB_COM=27 #,
-   SMB_SEM=28@#;
+   OP_DIV = 21
+   OP_ATRIB = 22
 
-   #char
-   CHAR=29
-   #constante
-   CHAR_CONST=30
-   NUM_CONST=31
+# Símbolos
+   SMB_OBC = 30
+   SMB_CBC = 31
+   SMB_OPA = 32
+   SMB_CPA = 33
+   SMB_COM = 34
+   SMB_SEM = 35
 
-   #Analisador Sintatico
-   KW_PROGRAM=32
+# Identificador
+   ID = 40
 
+# Constante
+   NUM_CONST = 50
+   CHAR_CONST = 51
 
-
-
-
-
+# Constantes para tipos
+   TIPO_CHAR = 1000;
+   TIPO_NUM  = 1001;
+   TIPO_BOOL = 1002;
+   TIPO_VOID = 1003;
+   TIPO_ERRO = 1004;
